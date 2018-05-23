@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.winter.mapper.ParseRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.winter.model.ParseRule" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="signal_name" property="signalName" jdbcType="VARCHAR" />
+    <result column="parse_type" property="parseType" jdbcType="INTEGER" />
+    <result column="signal_rule_value" property="signalRuleValue" jdbcType="VARCHAR" />
+    <result column="platform_base_id" property="platformBaseId" jdbcType="INTEGER" />
+    <result column="vehicle_type_id" property="vehicleTypeId" jdbcType="INTEGER" />
+    <result column="info_index" property="infoIndex" jdbcType="VARCHAR" />
+    <result column="status_name" property="statusName" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update_by" property="lastUpdateBy" jdbcType="BIGINT" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+    <result column="row_version" property="rowVersion" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, signal_name, parse_type, signal_rule_value, platform_base_id, vehicle_type_id, 
+    info_index, status_name, create_by, create_date, last_update_by, last_update_date, 
+    row_version, is_valid, status, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_report_vehicle_signal_parse_rule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from tb_report_vehicle_signal_parse_rule
+    where platform_base_id = #{platformBaseId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_report_vehicle_signal_parse_rule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="inserts" parameterType="java.util.ArrayList" >
+    insert into tb_report_vehicle_signal_parse_rule ( signal_name, parse_type,
+      signal_rule_value, platform_base_id, vehicle_type_id, 
+      info_index, status_name, create_by, 
+      create_date, last_update_by, last_update_date, 
+      row_version, is_valid, status, 
+      description)
+    values
+    <foreach collection="list" item="item" separator =",">
+    ( #{item.signalName,jdbcType=VARCHAR}, #{item.parseType,jdbcType=INTEGER},
+      #{item.signalRuleValue,jdbcType=VARCHAR}, #{item.platformBaseId,jdbcType=INTEGER}, #{item.vehicleTypeId,jdbcType=INTEGER},
+      #{item.infoIndex,jdbcType=VARCHAR}, #{item.statusName,jdbcType=VARCHAR}, #{item.createBy,jdbcType=BIGINT},
+      #{item.createDate,jdbcType=TIMESTAMP}, #{item.lastUpdateBy,jdbcType=BIGINT}, #{item.lastUpdateDate,jdbcType=TIMESTAMP},
+      #{item.rowVersion,jdbcType=INTEGER}, #{item.isValid,jdbcType=TINYINT}, #{item.status,jdbcType=TINYINT},
+      #{item.description,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+
+
+  <insert id="insert" parameterType="com.winter.model.ParseRule" >
+    insert into tb_report_vehicle_signal_parse_rule ( signal_name, parse_type,
+    signal_rule_value, platform_base_id, vehicle_type_id,
+    info_index, status_name, create_by,
+    create_date, last_update_by, last_update_date,
+    row_version, is_valid, status,
+    description)
+    values ( #{signalName,jdbcType=VARCHAR}, #{parseType,jdbcType=INTEGER},
+    #{signalRuleValue,jdbcType=VARCHAR}, #{platformBaseId,jdbcType=INTEGER}, #{vehicleTypeId,jdbcType=INTEGER},
+    #{infoIndex,jdbcType=VARCHAR}, #{statusName,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT},
+    #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=BIGINT}, #{lastUpdateDate,jdbcType=TIMESTAMP},
+    #{rowVersion,jdbcType=INTEGER}, #{isValid,jdbcType=TINYINT}, #{status,jdbcType=TINYINT},
+    #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winter.model.ParseRule" >
+    insert into tb_report_vehicle_signal_parse_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="signalName != null" >
+        signal_name,
+      </if>
+      <if test="parseType != null" >
+        parse_type,
+      </if>
+      <if test="signalRuleValue != null" >
+        signal_rule_value,
+      </if>
+      <if test="platformBaseId != null" >
+        platform_base_id,
+      </if>
+      <if test="vehicleTypeId != null" >
+        vehicle_type_id,
+      </if>
+      <if test="infoIndex != null" >
+        info_index,
+      </if>
+      <if test="statusName != null" >
+        status_name,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastUpdateBy != null" >
+        last_update_by,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="rowVersion != null" >
+        row_version,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="signalName != null" >
+        #{signalName,jdbcType=VARCHAR},
+      </if>
+      <if test="parseType != null" >
+        #{parseType,jdbcType=INTEGER},
+      </if>
+      <if test="signalRuleValue != null" >
+        #{signalRuleValue,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBaseId != null" >
+        #{platformBaseId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleTypeId != null" >
+        #{vehicleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="infoIndex != null" >
+        #{infoIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="statusName != null" >
+        #{statusName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null" >
+        #{lastUpdateBy,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowVersion != null" >
+        #{rowVersion,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.winter.model.ParseRule" >
+    update tb_report_vehicle_signal_parse_rule
+    <set >
+      <if test="signalName != null" >
+        signal_name = #{signalName,jdbcType=VARCHAR},
+      </if>
+      <if test="parseType != null" >
+        parse_type = #{parseType,jdbcType=INTEGER},
+      </if>
+      <if test="signalRuleValue != null" >
+        signal_rule_value = #{signalRuleValue,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBaseId != null" >
+        platform_base_id = #{platformBaseId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleTypeId != null" >
+        vehicle_type_id = #{vehicleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="infoIndex != null" >
+        info_index = #{infoIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="statusName != null" >
+        status_name = #{statusName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null" >
+        last_update_by = #{lastUpdateBy,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowVersion != null" >
+        row_version = #{rowVersion,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.winter.model.ParseRule" >
+    update tb_report_vehicle_signal_parse_rule
+    set signal_name = #{signalName,jdbcType=VARCHAR},
+      parse_type = #{parseType,jdbcType=INTEGER},
+      signal_rule_value = #{signalRuleValue,jdbcType=VARCHAR},
+      platform_base_id = #{platformBaseId,jdbcType=INTEGER},
+      vehicle_type_id = #{vehicleTypeId,jdbcType=INTEGER},
+      info_index = #{infoIndex,jdbcType=VARCHAR},
+      status_name = #{statusName,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_by = #{lastUpdateBy,jdbcType=BIGINT},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      row_version = #{rowVersion,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

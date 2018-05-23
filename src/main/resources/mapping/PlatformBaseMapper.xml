@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.winter.mapper.PlatformBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.winter.model.PlatformBase" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="socket_ip" property="socketIp" jdbcType="VARCHAR" />
+    <result column="socket_port" property="socketPort" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update_by" property="lastUpdateBy" jdbcType="BIGINT" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+    <result column="row_version" property="rowVersion" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="frequency" property="frequency" jdbcType="BIGINT" />
+    <result column="unique_symbol" property="uniqueSymbol" jdbcType="VARCHAR" />
+    <result column="send_frequency" property="sendFrequency" jdbcType="BIGINT" />
+    <result column="encryption_rule" property="encryptionRule" jdbcType="VARCHAR" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, socket_ip, socket_port, description, create_by, create_date, last_update_by, 
+    last_update_date, row_version, is_valid, status, frequency, unique_symbol, send_frequency, 
+    encryption_rule, platform_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_platform_base
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getByCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_platform_base
+    where code = #{code}
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_platform_base
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="com.winter.model.PlatformBase" >
+    insert into tb_platform_base ( code, socket_ip,
+      socket_port, description, create_by, 
+      create_date, last_update_by, last_update_date, 
+      row_version, is_valid, status, 
+      frequency, unique_symbol, send_frequency, 
+      encryption_rule, platform_name)
+    values (#{code,jdbcType=VARCHAR}, #{socketIp,jdbcType=VARCHAR},
+      #{socketPort,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=BIGINT}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
+      #{rowVersion,jdbcType=INTEGER}, #{isValid,jdbcType=TINYINT}, #{status,jdbcType=INTEGER}, 
+      #{frequency,jdbcType=BIGINT}, #{uniqueSymbol,jdbcType=VARCHAR}, #{sendFrequency,jdbcType=BIGINT}, 
+      #{encryptionRule,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winter.model.PlatformBase" >
+    insert into tb_platform_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="socketIp != null" >
+        socket_ip,
+      </if>
+      <if test="socketPort != null" >
+        socket_port,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastUpdateBy != null" >
+        last_update_by,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="rowVersion != null" >
+        row_version,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="frequency != null" >
+        frequency,
+      </if>
+      <if test="uniqueSymbol != null" >
+        unique_symbol,
+      </if>
+      <if test="sendFrequency != null" >
+        send_frequency,
+      </if>
+      <if test="encryptionRule != null" >
+        encryption_rule,
+      </if>
+      <if test="platformName != null" >
+        platform_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="socketIp != null" >
+        #{socketIp,jdbcType=VARCHAR},
+      </if>
+      <if test="socketPort != null" >
+        #{socketPort,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null" >
+        #{lastUpdateBy,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowVersion != null" >
+        #{rowVersion,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="frequency != null" >
+        #{frequency,jdbcType=BIGINT},
+      </if>
+      <if test="uniqueSymbol != null" >
+        #{uniqueSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="sendFrequency != null" >
+        #{sendFrequency,jdbcType=BIGINT},
+      </if>
+      <if test="encryptionRule != null" >
+        #{encryptionRule,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null" >
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.winter.model.PlatformBase" >
+    update tb_platform_base
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="socketIp != null" >
+        socket_ip = #{socketIp,jdbcType=VARCHAR},
+      </if>
+      <if test="socketPort != null" >
+        socket_port = #{socketPort,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null" >
+        last_update_by = #{lastUpdateBy,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowVersion != null" >
+        row_version = #{rowVersion,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="frequency != null" >
+        frequency = #{frequency,jdbcType=BIGINT},
+      </if>
+      <if test="uniqueSymbol != null" >
+        unique_symbol = #{uniqueSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="sendFrequency != null" >
+        send_frequency = #{sendFrequency,jdbcType=BIGINT},
+      </if>
+      <if test="encryptionRule != null" >
+        encryption_rule = #{encryptionRule,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null" >
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.winter.model.PlatformBase" >
+    update tb_platform_base
+    set code = #{code,jdbcType=VARCHAR},
+      socket_ip = #{socketIp,jdbcType=VARCHAR},
+      socket_port = #{socketPort,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_by = #{lastUpdateBy,jdbcType=BIGINT},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      row_version = #{rowVersion,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
+      frequency = #{frequency,jdbcType=BIGINT},
+      unique_symbol = #{uniqueSymbol,jdbcType=VARCHAR},
+      send_frequency = #{sendFrequency,jdbcType=BIGINT},
+      encryption_rule = #{encryptionRule,jdbcType=VARCHAR},
+      platform_name = #{platformName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
